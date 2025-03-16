@@ -1,0 +1,50 @@
+# CodeDoc Configuration Example
+
+# General settings
+verbose: false
+output_dir: "./docs_output"
+temp_dir: "./temp"
+
+# Parser settings
+supported_languages: 
+  - python
+  - javascript
+  - yaml
+  - json
+exclude_dirs:
+  - .git
+  - __pycache__
+  - venv
+  - node_modules
+  - .vscode
+exclude_files:
+  - .DS_Store
+  - "*.pyc"
+  - "*.pyo"
+  - "*.pyd"
+  - "*.so"
+  - "*.dll"
+
+# Documentation settings
+doc_formats:
+  - json
+  - markdown
+include_diagrams: true
+diagram_format: "mermaid"
+
+# Analysis settings
+analyze_imports: true
+analyze_inheritance: true
+analyze_calls: true
+analyze_data_flow: true
+analyze_api_endpoints: true
+
+# Enhancement settings
+enhance_with_llm: false
+llm_api_key: null  # Set your API key here or use environment variable
+llm_model: "gpt-4"
+
+# Output settings
+vector_db_ready: true
+chunk_size: 1000
+chunk_overlap: 200 

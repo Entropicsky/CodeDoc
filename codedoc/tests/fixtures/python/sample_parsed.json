@@ -1,0 +1,1478 @@
+{
+  "id": "04a86486-3be2-4d14-8e89-fe13a44d10d0",
+  "name": "sample",
+  "type": "ModuleEntity",
+  "docstring": "Sample Python module for testing the parser.\n\nThis module contains various Python features that the parser should handle:\n- Functions with different parameter types\n- Classes with inheritance\n- Decorators\n- Type annotations\n- Docstrings in different formats\n- Various import styles",
+  "parent_entity_id": null,
+  "line_start": 1,
+  "line_end": 25,
+  "file_path": "/Users/stewchisam/CodeDoc/examples/../codedoc/tests/fixtures/python/sample.py",
+  "docstring_sections": {},
+  "references": [],
+  "imports": [
+    {
+      "id": "c3c27ecc-88fd-40cd-9b48-7e6e5fa5880b",
+      "name": "os",
+      "type": "ImportEntity",
+      "docstring": "",
+      "parent_entity_id": "04a86486-3be2-4d14-8e89-fe13a44d10d0",
+      "line_start": 14,
+      "line_end": 14,
+      "file_path": null,
+      "docstring_sections": {},
+      "references": [],
+      "module_name": "os",
+      "imported_names": null,
+      "is_from": false
+    },
+    {
+      "id": "c4d8673a-ed16-4bbd-ba92-57084fab8282",
+      "name": "sys",
+      "type": "ImportEntity",
+      "docstring": "",
+      "parent_entity_id": "04a86486-3be2-4d14-8e89-fe13a44d10d0",
+      "line_start": 15,
+      "line_end": 15,
+      "file_path": null,
+      "docstring_sections": {},
+      "references": [],
+      "module_name": "sys",
+      "imported_names": null,
+      "is_from": false
+    },
+    {
+      "id": "7bc53547-0269-435c-8cc6-7eddd4d74098",
+      "name": "abc",
+      "type": "ImportEntity",
+      "docstring": "",
+      "parent_entity_id": "04a86486-3be2-4d14-8e89-fe13a44d10d0",
+      "line_start": 16,
+      "line_end": 16,
+      "file_path": null,
+      "docstring_sections": {},
+      "references": [],
+      "module_name": "abc",
+      "imported_names": null,
+      "is_from": false
+    },
+    {
+      "id": "bab5dd65-a1b6-4f3a-8ac8-fed5d264956e",
+      "name": "typing",
+      "type": "ImportEntity",
+      "docstring": "",
+      "parent_entity_id": "04a86486-3be2-4d14-8e89-fe13a44d10d0",
+      "line_start": 17,
+      "line_end": 17,
+      "file_path": null,
+      "docstring_sections": {},
+      "references": [],
+      "module_name": "typing",
+      "imported_names": [
+        "Any",
+        "Callable",
+        "Dict",
+        "List",
+        "Optional",
+        "Tuple",
+        "Union"
+      ],
+      "is_from": true
+    },
+    {
+      "id": "a7a562d6-d5dc-4be9-8715-6911a2fe276e",
+      "name": "pathlib",
+      "type": "ImportEntity",
+      "docstring": "",
+      "parent_entity_id": "04a86486-3be2-4d14-8e89-fe13a44d10d0",
+      "line_start": 18,
+      "line_end": 18,
+      "file_path": null,
+      "docstring_sections": {},
+      "references": [],
+      "module_name": "pathlib",
+      "imported_names": [
+        "Path"
+      ],
+      "is_from": true
+    },
+    {
+      "id": "5c6a75aa-31c2-46b6-96ea-5161492abb62",
+      "name": "dataclasses",
+      "type": "ImportEntity",
+      "docstring": "",
+      "parent_entity_id": "04a86486-3be2-4d14-8e89-fe13a44d10d0",
+      "line_start": 19,
+      "line_end": 19,
+      "file_path": null,
+      "docstring_sections": {},
+      "references": [],
+      "module_name": "dataclasses",
+      "imported_names": [
+        "dataclass",
+        "field"
+      ],
+      "is_from": true
+    },
+    {
+      "id": "9045df54-20ad-4421-86e0-546ea84b2c54",
+      "name": "yaml",
+      "type": "ImportEntity",
+      "docstring": "",
+      "parent_entity_id": "04a86486-3be2-4d14-8e89-fe13a44d10d0",
+      "line_start": 22,
+      "line_end": 22,
+      "file_path": null,
+      "docstring_sections": {},
+      "references": [],
+      "module_name": "yaml",
+      "imported_names": null,
+      "is_from": false
+    },
+    {
+      "id": "f1952e47-5c96-4594-9afd-9ccb069ab2b0",
+      "name": "..",
+      "type": "ImportEntity",
+      "docstring": "",
+      "parent_entity_id": "04a86486-3be2-4d14-8e89-fe13a44d10d0",
+      "line_start": 29,
+      "line_end": 29,
+      "file_path": null,
+      "docstring_sections": {},
+      "references": [],
+      "module_name": "..",
+      "imported_names": [
+        "utils"
+      ],
+      "is_from": true
+    },
+    {
+      "id": "a58100ea-e6f8-4cc8-b077-bc570233119b",
+      "name": ".constants",
+      "type": "ImportEntity",
+      "docstring": "",
+      "parent_entity_id": "04a86486-3be2-4d14-8e89-fe13a44d10d0",
+      "line_start": 30,
+      "line_end": 30,
+      "file_path": null,
+      "docstring_sections": {},
+      "references": [],
+      "module_name": ".constants",
+      "imported_names": [
+        "DEFAULT_VALUE"
+      ],
+      "is_from": true
+    }
+  ],
+  "functions": [
+    {
+      "id": "ed757796-0fef-4e5c-933b-15a8af5fa54f",
+      "name": "calculate_sum",
+      "type": "FunctionEntity",
+      "docstring": "Calculate the sum of two integers.\n\nArgs:\n    a: First integer\n    b: Second integer\n    \nReturns:\n    Sum of a and b",
+      "parent_entity_id": "04a86486-3be2-4d14-8e89-fe13a44d10d0",
+      "line_start": 40,
+      "line_end": 50,
+      "file_path": null,
+      "docstring_sections": {
+        "description": "Calculate the sum of two integers.",
+        "args": [
+          {
+            "name": "a",
+            "type": "",
+            "description": "First integer"
+          },
+          {
+            "name": "b",
+            "type": "",
+            "description": "Second integer"
+          }
+        ],
+        "returns": "Sum of a and b"
+      },
+      "references": [],
+      "arguments": [
+        {
+          "name": "a",
+          "type_annotation": {
+            "name": "int",
+            "is_container": false,
+            "container_types": []
+          },
+          "default_value": null,
+          "is_positional_only": false,
+          "is_keyword_only": false,
+          "is_variadic": false,
+          "is_variadic_positional": false,
+          "is_variadic_keyword": false
+        },
+        {
+          "name": "b",
+          "type_annotation": {
+            "name": "int",
+            "is_container": false,
+            "container_types": []
+          },
+          "default_value": null,
+          "is_positional_only": false,
+          "is_keyword_only": false,
+          "is_variadic": false,
+          "is_variadic_positional": false,
+          "is_variadic_keyword": false
+        }
+      ],
+      "return_type": {
+        "name": "int",
+        "is_container": false,
+        "container_types": []
+      },
+      "is_method": false,
+      "is_property": false,
+      "is_static": false,
+      "is_class_method": false,
+      "decorators": []
+    },
+    {
+      "id": "facdf476-ee68-4d71-a820-5e36b082329d",
+      "name": "process_data",
+      "type": "FunctionEntity",
+      "docstring": "Process a list of data items.\n\nThis function demonstrates:\n- Complex type annotations\n- Default parameter values\n- Optional parameters\n- Callable type hints\n\nParameters:\n    data: List of data items to process\n    max_items: Maximum number of items to process (None for all)\n    process_all: Whether to process all items regardless of max_items\n    callback: Optional callback function to call for each item\n\nReturns:\n    Tuple containing:\n    - List of processed items\n    - Count of processed items\n\nRaises:\n    ValueError: If data is empty",
+      "parent_entity_id": "04a86486-3be2-4d14-8e89-fe13a44d10d0",
+      "line_start": 54,
+      "line_end": 103,
+      "file_path": null,
+      "docstring_sections": {
+        "description": "Process a list of data items.\n\nThis function demonstrates:\n- Complex type annotations\n- Default parameter values\n- Optional parameters\n- Callable type hints\n\nParameters:\n    data: List of data items to process\n    max_items: Maximum number of items to process (None for all)\n    process_all: Whether to process all items regardless of max_items\n    callback: Optional callback function to call for each item",
+        "returns": "Tuple containing:\n    - List of processed items\n    - Count of processed items",
+        "raises": [
+          {
+            "name": "ValueError",
+            "type": "",
+            "description": "If data is empty"
+          }
+        ]
+      },
+      "references": [],
+      "arguments": [
+        {
+          "name": "data",
+          "type_annotation": {
+            "name": "List",
+            "is_container": true,
+            "container_types": [
+              {
+                "name": "Dict",
+                "is_container": true,
+                "container_types": [
+                  {
+                    "name": "str",
+                    "is_container": false,
+                    "container_types": []
+                  },
+                  {
+                    "name": "Any",
+                    "is_container": false,
+                    "container_types": []
+                  }
+                ]
+              }
+            ]
+          },
+          "default_value": null,
+          "is_positional_only": false,
+          "is_keyword_only": false,
+          "is_variadic": false,
+          "is_variadic_positional": false,
+          "is_variadic_keyword": false
+        },
+        {
+          "name": "max_items",
+          "type_annotation": {
+            "name": "Optional",
+            "is_container": true,
+            "container_types": [
+              {
+                "name": "int",
+                "is_container": false,
+                "container_types": []
+              }
+            ]
+          },
+          "default_value": "None",
+          "is_positional_only": false,
+          "is_keyword_only": false,
+          "is_variadic": false,
+          "is_variadic_positional": false,
+          "is_variadic_keyword": false
+        },
+        {
+          "name": "process_all",
+          "type_annotation": {
+            "name": "bool",
+            "is_container": false,
+            "container_types": []
+          },
+          "default_value": "False",
+          "is_positional_only": false,
+          "is_keyword_only": false,
+          "is_variadic": false,
+          "is_variadic_positional": false,
+          "is_variadic_keyword": false
+        },
+        {
+          "name": "callback",
+          "type_annotation": {
+            "name": "Optional",
+            "is_container": true,
+            "container_types": [
+              {
+                "name": "Callable",
+                "is_container": true,
+                "container_types": [
+                  {
+                    "name": "[Dict[str, Any]]",
+                    "is_container": false,
+                    "container_types": []
+                  },
+                  {
+                    "name": "None",
+                    "is_container": false,
+                    "container_types": []
+                  }
+                ]
+              }
+            ]
+          },
+          "default_value": "None",
+          "is_positional_only": false,
+          "is_keyword_only": false,
+          "is_variadic": false,
+          "is_variadic_positional": false,
+          "is_variadic_keyword": false
+        }
+      ],
+      "return_type": {
+        "name": "Tuple",
+        "is_container": true,
+        "container_types": [
+          {
+            "name": "List",
+            "is_container": true,
+            "container_types": [
+              {
+                "name": "Dict",
+                "is_container": true,
+                "container_types": [
+                  {
+                    "name": "str",
+                    "is_container": false,
+                    "container_types": []
+                  },
+                  {
+                    "name": "Any",
+                    "is_container": false,
+                    "container_types": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "int",
+            "is_container": false,
+            "container_types": []
+          }
+        ]
+      },
+      "is_method": false,
+      "is_property": false,
+      "is_static": false,
+      "is_class_method": false,
+      "decorators": []
+    },
+    {
+      "id": "bde9395d-4444-4934-b9c8-e4983e06c9f1",
+      "name": "complex_function",
+      "type": "FunctionEntity",
+      "docstring": "Process a list of items using the specified configuration and processors.\n\nThis function demonstrates complex code with various features:\n- Multiple classes and inheritance\n- Function calls\n- Control flow\n- Error handling\n- Type annotations\n\nArgs:\n    items: List of items to process\n    config: Optional configuration\n    processors: Optional list of processors\n    \nReturns:\n    Dictionary with processing results\n    \nRaises:\n    ValueError: If items is empty",
+      "parent_entity_id": "04a86486-3be2-4d14-8e89-fe13a44d10d0",
+      "line_start": 308,
+      "line_end": 381,
+      "file_path": null,
+      "docstring_sections": {
+        "description": "Process a list of items using the specified configuration and processors.\n\nThis function demonstrates complex code with various features:\n- Multiple classes and inheritance\n- Function calls\n- Control flow\n- Error handling\n- Type annotations",
+        "args": [
+          {
+            "name": "items",
+            "type": "",
+            "description": "List of items to process"
+          },
+          {
+            "name": "config",
+            "type": "",
+            "description": "Optional configuration"
+          },
+          {
+            "name": "processors",
+            "type": "",
+            "description": "Optional list of processors"
+          }
+        ],
+        "returns": "Dictionary with processing results",
+        "raises": [
+          {
+            "name": "ValueError",
+            "type": "",
+            "description": "If items is empty"
+          }
+        ]
+      },
+      "references": [],
+      "arguments": [
+        {
+          "name": "items",
+          "type_annotation": {
+            "name": "List",
+            "is_container": true,
+            "container_types": [
+              {
+                "name": "Item",
+                "is_container": false,
+                "container_types": []
+              }
+            ]
+          },
+          "default_value": null,
+          "is_positional_only": false,
+          "is_keyword_only": false,
+          "is_variadic": false,
+          "is_variadic_positional": false,
+          "is_variadic_keyword": false
+        },
+        {
+          "name": "config",
+          "type_annotation": {
+            "name": "Optional",
+            "is_container": true,
+            "container_types": [
+              {
+                "name": "Configuration",
+                "is_container": false,
+                "container_types": []
+              }
+            ]
+          },
+          "default_value": "None",
+          "is_positional_only": false,
+          "is_keyword_only": false,
+          "is_variadic": false,
+          "is_variadic_positional": false,
+          "is_variadic_keyword": false
+        },
+        {
+          "name": "processors",
+          "type_annotation": {
+            "name": "Optional",
+            "is_container": true,
+            "container_types": [
+              {
+                "name": "List",
+                "is_container": true,
+                "container_types": [
+                  {
+                    "name": "BaseProcessor",
+                    "is_container": false,
+                    "container_types": []
+                  }
+                ]
+              }
+            ]
+          },
+          "default_value": "None",
+          "is_positional_only": false,
+          "is_keyword_only": false,
+          "is_variadic": false,
+          "is_variadic_positional": false,
+          "is_variadic_keyword": false
+        }
+      ],
+      "return_type": {
+        "name": "Dict",
+        "is_container": true,
+        "container_types": [
+          {
+            "name": "str",
+            "is_container": false,
+            "container_types": []
+          },
+          {
+            "name": "Any",
+            "is_container": false,
+            "container_types": []
+          }
+        ]
+      },
+      "is_method": false,
+      "is_property": false,
+      "is_static": false,
+      "is_class_method": false,
+      "decorators": []
+    }
+  ],
+  "classes": [
+    {
+      "id": "b681614c-7323-45a0-9d36-50ccbdaa9557",
+      "name": "Item",
+      "type": "ClassEntity",
+      "docstring": "Base class for all items.\n\nAttributes:\n    name: The name of the item\n    value: The value of the item",
+      "parent_entity_id": "04a86486-3be2-4d14-8e89-fe13a44d10d0",
+      "line_start": 107,
+      "line_end": 134,
+      "file_path": null,
+      "docstring_sections": {
+        "description": "Base class for all items.",
+        "attributes": [
+          {
+            "name": "name",
+            "type": "",
+            "description": "The name of the item"
+          },
+          {
+            "name": "value",
+            "type": "",
+            "description": "The value of the item"
+          }
+        ]
+      },
+      "references": [],
+      "base_classes": [],
+      "methods": [
+        {
+          "id": "b10f31a7-b140-47f2-ae7e-15fbe146afc9",
+          "name": "__init__",
+          "type": "FunctionEntity",
+          "docstring": "Initialize the item.\n\nArgs:\n    name: The name of the item\n    value: The value of the item",
+          "parent_entity_id": "b681614c-7323-45a0-9d36-50ccbdaa9557",
+          "line_start": 115,
+          "line_end": 123,
+          "file_path": null,
+          "docstring_sections": {
+            "description": "Initialize the item.",
+            "args": [
+              {
+                "name": "name",
+                "type": "",
+                "description": "The name of the item"
+              },
+              {
+                "name": "value",
+                "type": "",
+                "description": "The value of the item"
+              }
+            ]
+          },
+          "references": [],
+          "arguments": [
+            {
+              "name": "name",
+              "type_annotation": {
+                "name": "str",
+                "is_container": false,
+                "container_types": []
+              },
+              "default_value": null,
+              "is_positional_only": false,
+              "is_keyword_only": false,
+              "is_variadic": false,
+              "is_variadic_positional": false,
+              "is_variadic_keyword": false
+            },
+            {
+              "name": "value",
+              "type_annotation": {
+                "name": "float",
+                "is_container": false,
+                "container_types": []
+              },
+              "default_value": null,
+              "is_positional_only": false,
+              "is_keyword_only": false,
+              "is_variadic": false,
+              "is_variadic_positional": false,
+              "is_variadic_keyword": false
+            }
+          ],
+          "return_type": null,
+          "is_method": true,
+          "is_property": false,
+          "is_static": false,
+          "is_class_method": false,
+          "decorators": []
+        },
+        {
+          "id": "7ebf68bc-385a-40d4-b5e3-8eed401c30a2",
+          "name": "__str__",
+          "type": "FunctionEntity",
+          "docstring": "",
+          "parent_entity_id": "b681614c-7323-45a0-9d36-50ccbdaa9557",
+          "line_start": 125,
+          "line_end": 126,
+          "file_path": null,
+          "docstring_sections": {
+            "description": ""
+          },
+          "references": [],
+          "arguments": [],
+          "return_type": {
+            "name": "str",
+            "is_container": false,
+            "container_types": []
+          },
+          "is_method": true,
+          "is_property": false,
+          "is_static": false,
+          "is_class_method": false,
+          "decorators": []
+        },
+        {
+          "id": "02b10f99-d196-4a6c-ac21-6caf540a4480",
+          "name": "get_value",
+          "type": "FunctionEntity",
+          "docstring": "Get the item's value.\n\nReturns:\n    The value of the item",
+          "parent_entity_id": "b681614c-7323-45a0-9d36-50ccbdaa9557",
+          "line_start": 128,
+          "line_end": 134,
+          "file_path": null,
+          "docstring_sections": {
+            "description": "Get the item's value.",
+            "returns": "The value of the item"
+          },
+          "references": [],
+          "arguments": [],
+          "return_type": {
+            "name": "float",
+            "is_container": false,
+            "container_types": []
+          },
+          "is_method": true,
+          "is_property": false,
+          "is_static": false,
+          "is_class_method": false,
+          "decorators": []
+        }
+      ],
+      "properties": [],
+      "class_variables": [],
+      "decorators": []
+    },
+    {
+      "id": "3f2a5494-1162-456d-8451-9ffb3341b9c1",
+      "name": "SpecialItem",
+      "type": "ClassEntity",
+      "docstring": "A special item with additional properties.\n\nThis class demonstrates inheritance and method overrides.\n\nAttributes:\n    name: The name of the item\n    value: The value of the item\n    special: Whether the item is special",
+      "parent_entity_id": "04a86486-3be2-4d14-8e89-fe13a44d10d0",
+      "line_start": 138,
+      "line_end": 167,
+      "file_path": null,
+      "docstring_sections": {
+        "description": "A special item with additional properties.\n\nThis class demonstrates inheritance and method overrides.",
+        "attributes": [
+          {
+            "name": "name",
+            "type": "",
+            "description": "The name of the item"
+          },
+          {
+            "name": "value",
+            "type": "",
+            "description": "The value of the item"
+          },
+          {
+            "name": "special",
+            "type": "",
+            "description": "Whether the item is special"
+          }
+        ]
+      },
+      "references": [],
+      "base_classes": [
+        "Item"
+      ],
+      "methods": [
+        {
+          "id": "5db4a741-5e6a-4d26-ba3e-6476bf886834",
+          "name": "__init__",
+          "type": "FunctionEntity",
+          "docstring": "Initialize the special item.\n\nArgs:\n    name: The name of the item\n    value: The value of the item\n    special: Whether the item is special",
+          "parent_entity_id": "3f2a5494-1162-456d-8451-9ffb3341b9c1",
+          "line_start": 149,
+          "line_end": 158,
+          "file_path": null,
+          "docstring_sections": {
+            "description": "Initialize the special item.",
+            "args": [
+              {
+                "name": "name",
+                "type": "",
+                "description": "The name of the item"
+              },
+              {
+                "name": "value",
+                "type": "",
+                "description": "The value of the item"
+              },
+              {
+                "name": "special",
+                "type": "",
+                "description": "Whether the item is special"
+              }
+            ]
+          },
+          "references": [],
+          "arguments": [
+            {
+              "name": "name",
+              "type_annotation": {
+                "name": "str",
+                "is_container": false,
+                "container_types": []
+              },
+              "default_value": null,
+              "is_positional_only": false,
+              "is_keyword_only": false,
+              "is_variadic": false,
+              "is_variadic_positional": false,
+              "is_variadic_keyword": false
+            },
+            {
+              "name": "value",
+              "type_annotation": {
+                "name": "float",
+                "is_container": false,
+                "container_types": []
+              },
+              "default_value": null,
+              "is_positional_only": false,
+              "is_keyword_only": false,
+              "is_variadic": false,
+              "is_variadic_positional": false,
+              "is_variadic_keyword": false
+            },
+            {
+              "name": "special",
+              "type_annotation": {
+                "name": "bool",
+                "is_container": false,
+                "container_types": []
+              },
+              "default_value": null,
+              "is_positional_only": false,
+              "is_keyword_only": false,
+              "is_variadic": false,
+              "is_variadic_positional": false,
+              "is_variadic_keyword": false
+            }
+          ],
+          "return_type": null,
+          "is_method": true,
+          "is_property": false,
+          "is_static": false,
+          "is_class_method": false,
+          "decorators": []
+        },
+        {
+          "id": "fc95f3e4-b1dd-4ffd-bd4a-f7c99d9c5b76",
+          "name": "get_value",
+          "type": "FunctionEntity",
+          "docstring": "Get the item's value with a special multiplier.\n\nReturns:\n    The value of the item multiplied by 2 if special",
+          "parent_entity_id": "3f2a5494-1162-456d-8451-9ffb3341b9c1",
+          "line_start": 160,
+          "line_end": 167,
+          "file_path": null,
+          "docstring_sections": {
+            "description": "Get the item's value with a special multiplier.",
+            "returns": "The value of the item multiplied by 2 if special"
+          },
+          "references": [],
+          "arguments": [],
+          "return_type": {
+            "name": "float",
+            "is_container": false,
+            "container_types": []
+          },
+          "is_method": true,
+          "is_property": false,
+          "is_static": false,
+          "is_class_method": false,
+          "decorators": []
+        }
+      ],
+      "properties": [],
+      "class_variables": [],
+      "decorators": []
+    },
+    {
+      "id": "5b95384f-d6ca-42f1-aac2-4968a004124b",
+      "name": "Configuration",
+      "type": "ClassEntity",
+      "docstring": "Configuration class using dataclass.\n\nAttributes:\n    name: Configuration name\n    enabled: Whether the configuration is enabled\n    values: Dictionary of configuration values\n    options: List of configuration options",
+      "parent_entity_id": "04a86486-3be2-4d14-8e89-fe13a44d10d0",
+      "line_start": 172,
+      "line_end": 192,
+      "file_path": null,
+      "docstring_sections": {
+        "description": "Configuration class using dataclass.",
+        "attributes": [
+          {
+            "name": "name",
+            "type": "",
+            "description": "Configuration name"
+          },
+          {
+            "name": "enabled",
+            "type": "",
+            "description": "Whether the configuration is enabled"
+          },
+          {
+            "name": "values",
+            "type": "",
+            "description": "Dictionary of configuration values"
+          },
+          {
+            "name": "options",
+            "type": "",
+            "description": "List of configuration options"
+          }
+        ]
+      },
+      "references": [],
+      "base_classes": [],
+      "methods": [
+        {
+          "id": "c141a8c5-1040-4f1a-a6dc-81ab69fa2e66",
+          "name": "is_valid",
+          "type": "FunctionEntity",
+          "docstring": "Check if the configuration is valid.\n\nReturns:\n    True if the configuration is valid, False otherwise",
+          "parent_entity_id": "5b95384f-d6ca-42f1-aac2-4968a004124b",
+          "line_start": 186,
+          "line_end": 192,
+          "file_path": null,
+          "docstring_sections": {
+            "description": "Check if the configuration is valid.",
+            "returns": "True if the configuration is valid, False otherwise"
+          },
+          "references": [],
+          "arguments": [],
+          "return_type": {
+            "name": "bool",
+            "is_container": false,
+            "container_types": []
+          },
+          "is_method": true,
+          "is_property": false,
+          "is_static": false,
+          "is_class_method": false,
+          "decorators": []
+        }
+      ],
+      "properties": [],
+      "class_variables": [
+        {
+          "id": "eb39b45c-ae30-4375-b0ac-2e955a5ffc27",
+          "name": "name",
+          "type": "VariableEntity",
+          "docstring": "",
+          "parent_entity_id": "5b95384f-d6ca-42f1-aac2-4968a004124b",
+          "line_start": 181,
+          "line_end": 181,
+          "file_path": null,
+          "docstring_sections": {},
+          "references": [],
+          "value": null,
+          "type_annotation": {
+            "name": "str",
+            "is_container": false,
+            "container_types": []
+          },
+          "is_class_var": true
+        },
+        {
+          "id": "e22a0296-842c-4c8e-85bc-0e1d6449426b",
+          "name": "enabled",
+          "type": "VariableEntity",
+          "docstring": "",
+          "parent_entity_id": "5b95384f-d6ca-42f1-aac2-4968a004124b",
+          "line_start": 182,
+          "line_end": 182,
+          "file_path": null,
+          "docstring_sections": {},
+          "references": [],
+          "value": "True",
+          "type_annotation": {
+            "name": "bool",
+            "is_container": false,
+            "container_types": []
+          },
+          "is_class_var": true
+        },
+        {
+          "id": "17571999-cd59-46da-a6a2-20ba00f704fd",
+          "name": "values",
+          "type": "VariableEntity",
+          "docstring": "",
+          "parent_entity_id": "5b95384f-d6ca-42f1-aac2-4968a004124b",
+          "line_start": 183,
+          "line_end": 183,
+          "file_path": null,
+          "docstring_sections": {},
+          "references": [],
+          "value": "field(...)",
+          "type_annotation": {
+            "name": "Dict",
+            "is_container": true,
+            "container_types": [
+              {
+                "name": "str",
+                "is_container": false,
+                "container_types": []
+              },
+              {
+                "name": "Any",
+                "is_container": false,
+                "container_types": []
+              }
+            ]
+          },
+          "is_class_var": true
+        },
+        {
+          "id": "5cfcc83c-df3b-4282-bce8-da493dffb422",
+          "name": "options",
+          "type": "VariableEntity",
+          "docstring": "",
+          "parent_entity_id": "5b95384f-d6ca-42f1-aac2-4968a004124b",
+          "line_start": 184,
+          "line_end": 184,
+          "file_path": null,
+          "docstring_sections": {},
+          "references": [],
+          "value": "field(...)",
+          "type_annotation": {
+            "name": "List",
+            "is_container": true,
+            "container_types": [
+              {
+                "name": "str",
+                "is_container": false,
+                "container_types": []
+              }
+            ]
+          },
+          "is_class_var": true
+        }
+      ],
+      "decorators": [
+        "dataclass"
+      ]
+    },
+    {
+      "id": "abc84796-3ee0-46e2-8e3c-c78ed3608b17",
+      "name": "BaseProcessor",
+      "type": "ClassEntity",
+      "docstring": "Abstract base class for all processors.\n\nThis class demonstrates abstract methods and class-level docstrings.",
+      "parent_entity_id": "04a86486-3be2-4d14-8e89-fe13a44d10d0",
+      "line_start": 196,
+      "line_end": 230,
+      "file_path": null,
+      "docstring_sections": {
+        "description": "Abstract base class for all processors.\n\nThis class demonstrates abstract methods and class-level docstrings."
+      },
+      "references": [],
+      "base_classes": [
+        "abc.ABC"
+      ],
+      "methods": [
+        {
+          "id": "9f3ae92c-6eb7-4574-ba61-1c440244a480",
+          "name": "process",
+          "type": "FunctionEntity",
+          "docstring": "Process the given data.\n\nArgs:\n    data: Data to process\n    \nReturns:\n    Processed data",
+          "parent_entity_id": "abc84796-3ee0-46e2-8e3c-c78ed3608b17",
+          "line_start": 203,
+          "line_end": 212,
+          "file_path": null,
+          "docstring_sections": {
+            "description": "Process the given data.",
+            "args": [
+              {
+                "name": "data",
+                "type": "",
+                "description": "Data to process"
+              }
+            ],
+            "returns": "Processed data"
+          },
+          "references": [],
+          "arguments": [
+            {
+              "name": "data",
+              "type_annotation": {
+                "name": "Any",
+                "is_container": false,
+                "container_types": []
+              },
+              "default_value": null,
+              "is_positional_only": false,
+              "is_keyword_only": false,
+              "is_variadic": false,
+              "is_variadic_positional": false,
+              "is_variadic_keyword": false
+            }
+          ],
+          "return_type": {
+            "name": "Any",
+            "is_container": false,
+            "container_types": []
+          },
+          "is_method": true,
+          "is_property": false,
+          "is_static": false,
+          "is_class_method": false,
+          "decorators": [
+            "abc.abstractmethod"
+          ]
+        },
+        {
+          "id": "18fd02f8-cf64-4a0f-a788-0587fa4aa55f",
+          "name": "create",
+          "type": "FunctionEntity",
+          "docstring": "Factory method to create a processor.\n\nArgs:\n    config: Configuration dictionary\n    \nReturns:\n    A processor instance",
+          "parent_entity_id": "abc84796-3ee0-46e2-8e3c-c78ed3608b17",
+          "line_start": 215,
+          "line_end": 230,
+          "file_path": null,
+          "docstring_sections": {
+            "description": "Factory method to create a processor.",
+            "args": [
+              {
+                "name": "config",
+                "type": "",
+                "description": "Configuration dictionary"
+              }
+            ],
+            "returns": "A processor instance"
+          },
+          "references": [],
+          "arguments": [
+            {
+              "name": "config",
+              "type_annotation": {
+                "name": "Dict",
+                "is_container": true,
+                "container_types": [
+                  {
+                    "name": "str",
+                    "is_container": false,
+                    "container_types": []
+                  },
+                  {
+                    "name": "Any",
+                    "is_container": false,
+                    "container_types": []
+                  }
+                ]
+              },
+              "default_value": null,
+              "is_positional_only": false,
+              "is_keyword_only": false,
+              "is_variadic": false,
+              "is_variadic_positional": false,
+              "is_variadic_keyword": false
+            }
+          ],
+          "return_type": {
+            "name": "'BaseProcessor'",
+            "is_container": false,
+            "container_types": []
+          },
+          "is_method": true,
+          "is_property": false,
+          "is_static": false,
+          "is_class_method": true,
+          "decorators": [
+            "classmethod"
+          ]
+        }
+      ],
+      "properties": [],
+      "class_variables": [],
+      "decorators": []
+    },
+    {
+      "id": "26f39ef2-2bf7-42ae-b58c-1fa7eced93cc",
+      "name": "DefaultProcessor",
+      "type": "ClassEntity",
+      "docstring": "Default implementation of BaseProcessor.",
+      "parent_entity_id": "04a86486-3be2-4d14-8e89-fe13a44d10d0",
+      "line_start": 234,
+      "line_end": 250,
+      "file_path": null,
+      "docstring_sections": {
+        "description": "Default implementation of BaseProcessor."
+      },
+      "references": [],
+      "base_classes": [
+        "BaseProcessor"
+      ],
+      "methods": [
+        {
+          "id": "51e020f1-efc0-4d4c-b30b-32ade07fef97",
+          "name": "__init__",
+          "type": "FunctionEntity",
+          "docstring": "",
+          "parent_entity_id": "26f39ef2-2bf7-42ae-b58c-1fa7eced93cc",
+          "line_start": 237,
+          "line_end": 238,
+          "file_path": null,
+          "docstring_sections": {
+            "description": ""
+          },
+          "references": [],
+          "arguments": [
+            {
+              "name": "kwargs",
+              "type_annotation": null,
+              "default_value": null,
+              "is_positional_only": false,
+              "is_keyword_only": false,
+              "is_variadic": true,
+              "is_variadic_positional": false,
+              "is_variadic_keyword": true
+            }
+          ],
+          "return_type": null,
+          "is_method": true,
+          "is_property": false,
+          "is_static": false,
+          "is_class_method": false,
+          "decorators": []
+        },
+        {
+          "id": "3972d0cf-8398-44a3-b4ec-e67f1faf314b",
+          "name": "process",
+          "type": "FunctionEntity",
+          "docstring": "Process the given data using the default strategy.\n\nArgs:\n    data: Data to process\n    \nReturns:\n    Processed data",
+          "parent_entity_id": "26f39ef2-2bf7-42ae-b58c-1fa7eced93cc",
+          "line_start": 240,
+          "line_end": 250,
+          "file_path": null,
+          "docstring_sections": {
+            "description": "Process the given data using the default strategy.",
+            "args": [
+              {
+                "name": "data",
+                "type": "",
+                "description": "Data to process"
+              }
+            ],
+            "returns": "Processed data"
+          },
+          "references": [],
+          "arguments": [
+            {
+              "name": "data",
+              "type_annotation": {
+                "name": "Any",
+                "is_container": false,
+                "container_types": []
+              },
+              "default_value": null,
+              "is_positional_only": false,
+              "is_keyword_only": false,
+              "is_variadic": false,
+              "is_variadic_positional": false,
+              "is_variadic_keyword": false
+            }
+          ],
+          "return_type": {
+            "name": "Any",
+            "is_container": false,
+            "container_types": []
+          },
+          "is_method": true,
+          "is_property": false,
+          "is_static": false,
+          "is_class_method": false,
+          "decorators": []
+        }
+      ],
+      "properties": [],
+      "class_variables": [],
+      "decorators": []
+    },
+    {
+      "id": "6243d674-1aa5-4194-8eec-ebce806b608c",
+      "name": "SpecialProcessor",
+      "type": "ClassEntity",
+      "docstring": "Special implementation of BaseProcessor with decorators.",
+      "parent_entity_id": "04a86486-3be2-4d14-8e89-fe13a44d10d0",
+      "line_start": 254,
+      "line_end": 304,
+      "file_path": null,
+      "docstring_sections": {
+        "description": "Special implementation of BaseProcessor with decorators."
+      },
+      "references": [],
+      "base_classes": [
+        "BaseProcessor"
+      ],
+      "methods": [
+        {
+          "id": "a7c25a1f-769f-49ce-989c-c8c27571ad42",
+          "name": "__init__",
+          "type": "FunctionEntity",
+          "docstring": "",
+          "parent_entity_id": "6243d674-1aa5-4194-8eec-ebce806b608c",
+          "line_start": 257,
+          "line_end": 259,
+          "file_path": null,
+          "docstring_sections": {
+            "description": ""
+          },
+          "references": [],
+          "arguments": [
+            {
+              "name": "kwargs",
+              "type_annotation": null,
+              "default_value": null,
+              "is_positional_only": false,
+              "is_keyword_only": false,
+              "is_variadic": true,
+              "is_variadic_positional": false,
+              "is_variadic_keyword": true
+            }
+          ],
+          "return_type": null,
+          "is_method": true,
+          "is_property": false,
+          "is_static": false,
+          "is_class_method": false,
+          "decorators": []
+        },
+        {
+          "id": "e2b711aa-761c-4d8b-b3e4-02b465ded2e5",
+          "name": "name",
+          "type": "FunctionEntity",
+          "docstring": "Get the processor name.",
+          "parent_entity_id": "6243d674-1aa5-4194-8eec-ebce806b608c",
+          "line_start": 262,
+          "line_end": 264,
+          "file_path": null,
+          "docstring_sections": {
+            "description": "Get the processor name."
+          },
+          "references": [],
+          "arguments": [],
+          "return_type": {
+            "name": "str",
+            "is_container": false,
+            "container_types": []
+          },
+          "is_method": true,
+          "is_property": true,
+          "is_static": false,
+          "is_class_method": false,
+          "decorators": [
+            "property"
+          ]
+        },
+        {
+          "id": "ee6e73db-7d7c-4f86-b268-bfe89dc7fe39",
+          "name": "get_version",
+          "type": "FunctionEntity",
+          "docstring": "Get the processor version.\n\nReturns:\n    The processor version",
+          "parent_entity_id": "6243d674-1aa5-4194-8eec-ebce806b608c",
+          "line_start": 267,
+          "line_end": 273,
+          "file_path": null,
+          "docstring_sections": {
+            "description": "Get the processor version.",
+            "returns": "The processor version"
+          },
+          "references": [],
+          "arguments": [],
+          "return_type": {
+            "name": "str",
+            "is_container": false,
+            "container_types": []
+          },
+          "is_method": true,
+          "is_property": false,
+          "is_static": true,
+          "is_class_method": false,
+          "decorators": [
+            "staticmethod"
+          ]
+        },
+        {
+          "id": "0c4fc22e-842f-43f2-a17a-a5c6144707c8",
+          "name": "from_config_file",
+          "type": "FunctionEntity",
+          "docstring": "Create a processor from a configuration file.\n\nArgs:\n    path: Path to the configuration file\n    \nReturns:\n    A processor instance",
+          "parent_entity_id": "6243d674-1aa5-4194-8eec-ebce806b608c",
+          "line_start": 276,
+          "line_end": 287,
+          "file_path": null,
+          "docstring_sections": {
+            "description": "Create a processor from a configuration file.",
+            "args": [
+              {
+                "name": "path",
+                "type": "",
+                "description": "Path to the configuration file"
+              }
+            ],
+            "returns": "A processor instance"
+          },
+          "references": [],
+          "arguments": [
+            {
+              "name": "path",
+              "type_annotation": {
+                "name": "Union",
+                "is_container": true,
+                "container_types": [
+                  {
+                    "name": "str",
+                    "is_container": false,
+                    "container_types": []
+                  },
+                  {
+                    "name": "Path",
+                    "is_container": false,
+                    "container_types": []
+                  }
+                ]
+              },
+              "default_value": null,
+              "is_positional_only": false,
+              "is_keyword_only": false,
+              "is_variadic": false,
+              "is_variadic_positional": false,
+              "is_variadic_keyword": false
+            }
+          ],
+          "return_type": {
+            "name": "'SpecialProcessor'",
+            "is_container": false,
+            "container_types": []
+          },
+          "is_method": true,
+          "is_property": false,
+          "is_static": false,
+          "is_class_method": true,
+          "decorators": [
+            "classmethod"
+          ]
+        },
+        {
+          "id": "d9d46901-22b4-4607-b79f-b522d88f60af",
+          "name": "process",
+          "type": "FunctionEntity",
+          "docstring": "Process the given data using the special strategy.\n\nArgs:\n    data: Data to process\n    \nReturns:\n    Processed data",
+          "parent_entity_id": "6243d674-1aa5-4194-8eec-ebce806b608c",
+          "line_start": 289,
+          "line_end": 304,
+          "file_path": null,
+          "docstring_sections": {
+            "description": "Process the given data using the special strategy.",
+            "args": [
+              {
+                "name": "data",
+                "type": "",
+                "description": "Data to process"
+              }
+            ],
+            "returns": "Processed data"
+          },
+          "references": [],
+          "arguments": [
+            {
+              "name": "data",
+              "type_annotation": {
+                "name": "Any",
+                "is_container": false,
+                "container_types": []
+              },
+              "default_value": null,
+              "is_positional_only": false,
+              "is_keyword_only": false,
+              "is_variadic": false,
+              "is_variadic_positional": false,
+              "is_variadic_keyword": false
+            }
+          ],
+          "return_type": {
+            "name": "Any",
+            "is_container": false,
+            "container_types": []
+          },
+          "is_method": true,
+          "is_property": false,
+          "is_static": false,
+          "is_class_method": false,
+          "decorators": []
+        }
+      ],
+      "properties": [],
+      "class_variables": [],
+      "decorators": []
+    }
+  ],
+  "variables": [
+    {
+      "id": "cbbc276f-60f5-4da3-9d7e-bd63aafe6669",
+      "name": "DEBUG",
+      "type": "VariableEntity",
+      "docstring": "",
+      "parent_entity_id": "04a86486-3be2-4d14-8e89-fe13a44d10d0",
+      "line_start": 34,
+      "line_end": 34,
+      "file_path": null,
+      "docstring_sections": {},
+      "references": [],
+      "value": "os.environ.get('DEBUG', 'False').lower() in ('true', '1', 'yes')",
+      "type_annotation": null,
+      "is_class_var": false
+    },
+    {
+      "id": "612103a7-4990-42c5-bcf4-468b693468a3",
+      "name": "MAX_ITEMS",
+      "type": "VariableEntity",
+      "docstring": "",
+      "parent_entity_id": "04a86486-3be2-4d14-8e89-fe13a44d10d0",
+      "line_start": 35,
+      "line_end": 35,
+      "file_path": null,
+      "docstring_sections": {},
+      "references": [],
+      "value": "100",
+      "type_annotation": null,
+      "is_class_var": false
+    },
+    {
+      "id": "ee356770-8694-4e20-bc0a-973b302b5e86",
+      "name": "VERSION",
+      "type": "VariableEntity",
+      "docstring": "",
+      "parent_entity_id": "04a86486-3be2-4d14-8e89-fe13a44d10d0",
+      "line_start": 36,
+      "line_end": 36,
+      "file_path": null,
+      "docstring_sections": {},
+      "references": [],
+      "value": "'1.0.0'",
+      "type_annotation": null,
+      "is_class_var": false
+    }
+  ]
+}

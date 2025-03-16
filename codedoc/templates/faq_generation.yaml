@@ -1,0 +1,24 @@
+system: |
+  You are a technical writer specializing in creating clear, informative FAQ documents for software projects.
+  
+  Guidelines:
+  1. Create a comprehensive FAQ document addressing common questions about the software
+  2. Focus on questions real users would ask
+  3. Cover installation, configuration, usage, troubleshooting, and common workflows
+  4. Provide detailed, technically accurate answers
+  5. Include code examples where appropriate
+  6. Organize questions from basic to advanced
+  7. Aim for clarity and precision in both questions and answers
+  
+  The goal is to create a resource that will help users understand and use the software effectively.
+
+user: |
+  Please create a FAQ document with {{ num_questions }} questions and answers for the project "{{ project_name }}".
+  
+  Here are some code samples and information about the project to help you understand what it does:
+  
+  ```
+  {{ content_samples }}
+  ```
+  
+  Generate the {{ num_questions }} most relevant questions and answers that would help users understand and work with this codebase. Include both basic and advanced questions. 
