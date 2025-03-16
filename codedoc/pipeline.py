@@ -292,141 +292,73 @@ class Pipeline:
         
         return results
     
-    def process_files_for_vectorization(self, 
-                                      include_enhanced: bool = True,
-                                      include_supplementary: bool = True,
-                                      include_original: bool = False,
-                                      file_patterns: List[str] = ["*.py", "*.js", "*.java", "*.md"],
-                                      purpose: str = "assistants") -> Dict[str, Any]:
-        """
-        Process files for vectorization.
+    def process_files_for_vectorization(self):
+        """Process files for vectorization and upload to OpenAI."""
+        if not self.input_dir:
+            logger.error("No input directory specified.")
+            return None
         
-        Args:
-            include_enhanced: Whether to include enhanced code files
-            include_original: Whether to include original code files
-            include_supplementary: Whether to include supplementary documentation
-            file_patterns: Glob patterns for files to process
-            purpose: Purpose of the file upload (vector_search, assistants, etc.)
-            
-        Returns:
-            Dictionary with processing statistics
-        """
-        logger.info("Processing files for vectorization")
-        
-        all_files = []
-        file_sources = {}
-        
-        # Collect files to process
-        if include_enhanced and self.enhanced_code_dir.exists():
-            for pattern in file_patterns:
-                files = list(self.enhanced_code_dir.glob(f"**/{pattern}"))
-                for file in files:
-                    all_files.append(file)
-                    file_sources[str(file)] = "enhanced"
-                    
-        if include_supplementary and self.supplementary_docs_dir.exists():
-            for pattern in file_patterns:
-                files = list(self.supplementary_docs_dir.glob(f"**/{pattern}"))
-                for file in files:
-                    all_files.append(file)
-                    file_sources[str(file)] = "supplementary"
-                    
-        if include_original and self.input_dir and Path(self.input_dir).exists():
-            for pattern in file_patterns:
-                files = list(Path(self.input_dir).glob(f"**/{pattern}"))
-                for file in files:
-                    all_files.append(file)
-                    file_sources[str(file)] = "original"
-                    
-        logger.info(f"Found {len(all_files)} files to process")
-        
-        # Process files
-        results = {
-            "processed": [],
-            "failed": [],
-            "uploaded_file_ids": []
-        }
-        
-        for file in all_files:
-            try:
-                # Add custom metadata about the file source
-                custom_metadata = {
-                    "source_type": file_sources.get(str(file), "unknown")
-                }
-                
-                result = self.file_processor.process_file(
-                    file_path=file, 
-                    purpose=purpose,
-                    custom_metadata=custom_metadata
-                )
-                
-                if result["status"] == "success":
-                    results["processed"].append(result)
-                    if "openai_file_id" in result:
-                        results["uploaded_file_ids"].append(result["openai_file_id"])
-                else:
-                    results["failed"].append(result)
-                    
-            except Exception as e:
-                logger.error(f"Error processing file {file}: {str(e)}")
-                results["failed"].append({
-                    "file_path": str(file),
-                    "status": "error",
-                    "error": str(e)
-                })
-        
-        # Update statistics
-        self.stats["files_processed"] = len(results["processed"])
-        
-        logger.info(f"File processing completed: {len(results['processed'])} files processed successfully, "
-                  f"{len(results['failed'])} failed")
-        logger.info(f"Uploaded {len(results['uploaded_file_ids'])} files to OpenAI")
-        
-        return results
-    
-    def upload_to_vector_store(self, 
-                             file_ids: List[str],
-                             name: Optional[str] = None,
-                             chunking_strategy: Optional[Dict[str, Any]] = None,
-                             metadata: Optional[Dict[str, str]] = None) -> Dict[str, Any]:
-        """
-        Create a vector store with the processed files.
-        
-        Args:
-            file_ids: List of OpenAI file IDs to include
-            name: Name of the vector store (defaults to project name or timestamp)
-            chunking_strategy: Optional chunking strategy configuration
-            metadata: Optional metadata for the vector store
-            
-        Returns:
-            Dictionary with vector store creation results
-        """
-        logger.info("Creating OpenAI vector store")
-        
-        # Use default name if not provided
-        if name is None:
-            name = f"codedoc_store_{int(time.time())}"
-            
-        # Create vector store
-        result = self.file_processor.create_vector_store(
-            name=name,
-            file_ids=file_ids,
-            chunking_strategy=chunking_strategy,
-            metadata=metadata
+        logger.info("Processing files for vectorization...")
+        processor = DirectFileProcessor(
+            output_dir=self.output_compiled_dir,
+            purpose=self.args.purpose if hasattr(self.args, 'purpose') else 'assistants',
+            file_patterns=self.file_patterns
         )
         
-        # Update statistics
-        if result["status"] == "success":
-            self.stats["vector_store_id"] = result["vector_store_id"]
-            self.stats["vector_store_name"] = result["name"]
-            
-            if "processing_status" in result:
-                for status_key, status_value in result["processing_status"].items():
-                    self.stats[f"vector_store_{status_key}"] = status_value
+        file_results = processor.process_directory(self.input_dir)
         
-        logger.info(f"Vector store creation {'completed successfully' if result['status'] == 'success' else 'failed'}")
+        logger.info(f"File processing completed: {file_results['summary']['successful_files']} files processed successfully, {file_results['summary']['failed_files']} failed")
         
-        return result
+        if file_results['summary']['successful_files'] == 0:
+            logger.warning("No files were successfully processed. Skipping vector store creation.")
+            return None
+        
+        logger.info(f"Uploaded {file_results['summary']['successful_files']} files to OpenAI")
+        
+        if hasattr(self.args, 'skip_upload') and self.args.skip_upload:
+            logger.info("Skipping vector store creation as requested.")
+            return None
+        
+        logger.info(f"Creating vector store with {len(file_results['summary']['uploaded_file_ids'])} uploaded files")
+        
+        logger.info("Creating OpenAI vector store")
+        vector_store = processor.create_vector_store(
+            name=f'"{self.args.project_name}"',
+            file_ids=file_results['summary']['uploaded_file_ids']
+        )
+        
+        if not vector_store:
+            logger.info("Vector store creation failed")
+            return None
+        
+        # Wait for files to be processed
+        logger.info(f"Vector store created with ID: {vector_store.id}. Checking processing status...")
+        is_ready, status = processor.vector_client.check_vector_store_status(
+            vector_store_id=vector_store.id,
+            max_checks=30,  # Increased for larger file counts
+            check_interval=5  # Longer interval for larger batches
+        )
+        
+        # Convert the FileCounts object to a dictionary for easier handling
+        status_dict = {}
+        if hasattr(status, 'total'):
+            status_dict['total'] = status.total
+        if hasattr(status, 'completed'):
+            status_dict['completed'] = status.completed
+        if hasattr(status, 'failed'):
+            status_dict['failed'] = status.failed
+        if hasattr(status, 'in_progress'):
+            status_dict['in_progress'] = status.in_progress
+        if hasattr(status, 'cancelled'):
+            status_dict['cancelled'] = status.cancelled
+        
+        logger.info(f"Vector store processing status: {status_dict}")
+        if is_ready:
+            logger.info(f"Vector store {vector_store.id} is ready for use!")
+        else:
+            logger.warning(f"Vector store {vector_store.id} is still processing. Check status manually later.")
+        
+        return vector_store.id
     
     def run_pipeline(self, 
                    input_dir: Union[str, Path],
@@ -504,11 +436,7 @@ class Pipeline:
             
         # Step 4: Process files for vectorization
         if not skip_processing:
-            results["processing"] = self.process_files_for_vectorization(
-                include_enhanced=not skip_enhancement,
-                include_original=True,
-                include_supplementary=not skip_supplementary
-            )
+            results["processing"] = self.process_files_for_vectorization()
         else:
             logger.info("Skipping file processing for vectorization")
             

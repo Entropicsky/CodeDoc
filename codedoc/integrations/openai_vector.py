@@ -276,32 +276,34 @@ class OpenAIVectorClient:
             for embedding and retrieval. This is more efficient and effective than
             pre-chunking documents before upload.
         """
-        logger.info(f"{prefix}Creating vector store: {name}")
+        if not chunking_strategy:
+            chunking_strategy = {"type": "auto"}
         
         try:
-            create_args = {
-                "name": name
-            }
-            
-            if file_ids:
-                create_args["file_ids"] = file_ids
-                
-            # Use default "auto" chunking if not specified
-            if chunking_strategy is None:
-                chunking_strategy = {"type": "auto"}
-                
-            create_args["chunking_strategy"] = chunking_strategy
-                
-            if metadata:
-                create_args["metadata"] = metadata
-            
-            # Log the chunking strategy being used
+            logger.info(f"{prefix}Creating vector store: {name}")
             logger.info(f"{prefix}Using chunking strategy: {chunking_strategy}")
             
-            response = self.client.vector_stores.create(**create_args)
+            # Create the vector store first without files
+            vector_store = self.client.vector_stores.create(
+                name=name
+            )
+            vector_store_id = vector_store.id
+            logger.info(f"{prefix}Created vector store with ID: {vector_store_id}")
             
-            logger.info(f"{prefix}Vector store created successfully: {response.id}")
-            return response
+            # Add files in batches of 100 (OpenAI limit)
+            batch_size = 100
+            for i in range(0, len(file_ids), batch_size):
+                batch = file_ids[i:i + batch_size]
+                logger.info(f"{prefix}Adding batch of {len(batch)} files to vector store (batch {i//batch_size + 1} of {(len(file_ids) + batch_size - 1)//batch_size})")
+                
+                file_batch = self.client.vector_stores.add_files(
+                    vector_store_id=vector_store_id,
+                    file_ids=batch,
+                    chunking_strategy=chunking_strategy
+                )
+                logger.info(f"{prefix}Added batch {i//batch_size + 1} with ID: {file_batch.id}")
+            
+            return vector_store
             
         except openai.OpenAIError as e:
             logger.error(f"{prefix}Error creating vector store: {str(e)}")

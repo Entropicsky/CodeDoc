@@ -306,66 +306,31 @@ class DirectFileProcessor:
             "summary": summary
         }
         
-    def create_vector_store(self,
-                          name: str,
-                          file_ids: List[str],
-                          chunking_strategy: Optional[Dict[str, Any]] = None,
-                          metadata: Optional[Dict[str, str]] = None) -> Dict[str, Any]:
+    def create_vector_store(self, name, file_ids, chunking_strategy=None):
         """
-        Create a vector store with the uploaded files.
+        Create a vector store with the provided file IDs using OpenAI's native chunking.
         
         Args:
-            name: Name of the vector store
-            file_ids: List of file IDs to include in the vector store
-            chunking_strategy: Optional chunking strategy configuration
-            metadata: Optional metadata for the vector store
-            
+            name (str): The name of the vector store.
+            file_ids (list): A list of file IDs to add to the vector store.
+            chunking_strategy (dict, optional): The chunking strategy to use. Defaults to auto.
+        
         Returns:
-            Dictionary with vector store creation results
+            dict: Information about the created vector store or None if creation failed.
         """
         logger.info(f"Creating vector store '{name}' with {len(file_ids)} files")
-        
-        # Create vector store
-        vector_store = self.vector_client.create_vector_store(
-            name=name,
-            file_ids=file_ids,
-            chunking_strategy=chunking_strategy,
-            metadata=metadata
-        )
-        
-        if not vector_store:
-            logger.error(f"Failed to create vector store '{name}'")
-            return {
-                "status": "failed",
-                "reason": "vector store creation failed"
-            }
-            
-        logger.info(f"Vector store created successfully: {vector_store.id}")
-        
-        # Wait for files to be processed
-        is_ready, status = self.vector_client.check_vector_store_status(
-            vector_store_id=vector_store.id,
-            max_checks=20,
-            check_interval=3
-        )
-        
-        # Convert the FileCounts object to a dictionary for easier handling
-        status_dict = {}
-        if hasattr(status, 'total'):
-            status_dict['total'] = status.total
-        if hasattr(status, 'completed'):
-            status_dict['completed'] = status.completed
-        if hasattr(status, 'failed'):
-            status_dict['failed'] = status.failed
-        if hasattr(status, 'in_progress'):
-            status_dict['in_progress'] = status.in_progress
-        if hasattr(status, 'cancelled'):
-            status_dict['cancelled'] = status.cancelled
-        
-        return {
-            "status": "success" if is_ready else "in_progress",
-            "vector_store_id": vector_store.id,
-            "name": name,
-            "file_count": len(file_ids),
-            "processing_status": status_dict
-        } 
+        try:
+            vector_store = self.vector_client.create_vector_store(
+                name=name,
+                file_ids=file_ids,
+                chunking_strategy=chunking_strategy
+            )
+            if vector_store:
+                logger.info(f"Vector store created successfully with ID: {vector_store.id}")
+                return vector_store
+            else:
+                logger.error(f"Failed to create vector store '{name}'")
+                return None
+        except Exception as e:
+            logger.error(f"Failed to create vector store '{name}': {str(e)}")
+            return None 

@@ -569,10 +569,11 @@ OPENAI_API_KEY=$(grep OPENAI_API_KEY .env | cut -d '=' -f2) python3 -m codedoc.p
 - [x] Create comprehensive documentation for pipeline execution
 - [x] Test pipeline with the new wrapper script
 - [x] Update OpenAI Vector Stores API from beta to stable version
-- [ ] Add pagination support for file and vector store listings
-- [ ] Ensure robust error handling for all API interactions
-- [x] Update all tests to reflect new implementation
-- [x] Create dedicated integration tests for OpenAI APIs
+- [x] Add batch processing for large file collections (100+ files)
+- [ ] Implement pagination for file and vector store listings
+- [ ] Add more robust error handling throughout the pipeline
+- [ ] Create comprehensive end-user documentation including tutorials and guides
+- [ ] Expand test coverage for error conditions and large files
 
 ## Documentation Tasks
 - [x] Update API documentation to remove chunking references
@@ -642,6 +643,7 @@ OPENAI_API_KEY=$(grep OPENAI_API_KEY .env | cut -d '=' -f2) python3 -m codedoc.p
 - [x] Create comprehensive documentation for pipeline execution
 - [x] Test pipeline with the new wrapper script
 - [x] Update OpenAI Vector Stores API from beta to stable version
+- [x] Add batch processing for large file collections (100+ files)
 - [ ] Implement pagination for file and vector store listings
 - [ ] Add more robust error handling throughout the pipeline
 - [ ] Create comprehensive end-user documentation including tutorials and guides
@@ -679,4 +681,10 @@ OPENAI_API_KEY=$(grep OPENAI_API_KEY .env | cut -d '=' -f2) python3 -m codedoc.p
 - [x] Update OpenAI purpose parameter from "vector_search" to "assistants"
 - [x] Create user-friendly shell script wrapper for pipeline execution
 - [x] Create comprehensive documentation for pipeline execution
-- [x] Test pipeline with the new wrapper script 
+- [x] Test pipeline with the new wrapper script
+- [x] Update OpenAI Vector Stores API from beta to stable version
+- [x] Add batch processing for large file collections (100+ files)
+- [ ] Implement pagination for file and vector store listings
+- [ ] Add more robust error handling throughout the pipeline
+- [ ] Create comprehensive end-user documentation including tutorials and guides
+- [ ] Expand test coverage for error conditions and large files 

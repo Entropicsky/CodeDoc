@@ -676,3 +676,39 @@ We've updated the OpenAI Vector Stores API integration to use the stable API ins
    - Completes the vector store creation process
 
 This update ensures compatibility with the latest OpenAI API structure, as the vector stores feature has graduated from beta to stable status.
+
+## OpenAI Vector Stores API File Limit Fix - March 16, 2024
+
+When processing large codebases with hundreds of files, we encountered an API limitation with the OpenAI Vector Stores API:
+
+```
+Error creating vector store: Error code: 400 - {'error': {'message': "Invalid 'file_ids': array too long. Expected an array with maximum length 100, but got an array with length 618 instead.", 'type': 'invalid_request_error', 'param': 'file_ids', 'code': 'array_above_max_length'}}
+```
+
+The OpenAI Vector Stores API has a limit of 100 files per vector store creation request. To address this limitation, we implemented a batching approach:
+
+### Changes Made
+
+1. Modified `OpenAIVectorClient.create_vector_store()` to:
+   - First create an empty vector store
+   - Then add files in batches of 100 using the `vector_stores.add_files()` method
+   - Log progress for each batch
+
+2. Updated the `Pipeline.process_files_for_vectorization()` method to:
+   - Correctly extract file IDs from the processor's summary
+   - Add checks for the `skip_upload` attribute
+   - Improve error handling and status reporting
+
+3. Fixed the `DirectFileProcessor` to use consistent logging patterns.
+
+This implementation allows for processing arbitrarily large codebases by adding files in batches that respect the API limits. Each batch is logged with progress information, making it easier to monitor the process.
+
+### API Limits to Be Aware Of
+
+- Maximum 100 files per vector store creation request
+- Maximum 100 files per add_files request
+- Files must be smaller than 512MB each
+- Vector stores support up to 20,000 files total
+- Rate limits apply to API requests
+
+When working with very large codebases, it may be necessary to create multiple vector stores or to carefully select which files to include.
