@@ -278,7 +278,7 @@ class OpenAIClient(LLMClient):
             LLMError: If creating the vector store fails
         """
         try:
-            vector_store = self.client.beta.vector_stores.create(name=name)
+            vector_store = self.client.vector_stores.create(name=name)
             logger.info(f"Vector store created: {vector_store.id}")
             return {
                 "id": vector_store.id,
@@ -332,7 +332,7 @@ class OpenAIClient(LLMClient):
             LLMError: If adding files fails
         """
         try:
-            file_batch = self.client.beta.vector_stores.file_batches.create(
+            file_batch = self.client.vector_stores.add_files(
                 vector_store_id=vector_store_id,
                 file_ids=file_ids
             )
@@ -358,7 +358,7 @@ class OpenAIClient(LLMClient):
             LLMError: If checking status fails
         """
         try:
-            status = self.client.beta.vector_stores.file_batches.retrieve(
+            status = self.client.vector_stores.retrieve_file_batch(
                 vector_store_id=vector_store_id,
                 file_batch_id=file_batch_id
             )

@@ -564,6 +564,11 @@ OPENAI_API_KEY=$(grep OPENAI_API_KEY .env | cut -d '=' -f2) python3 -m codedoc.p
 - [x] Update file processor to bypass chunking
 - [x] Remove chunking-related configuration options
 - [x] Add comprehensive logging for debugging
+- [x] Update OpenAI purpose parameter from "vector_search" to "assistants"
+- [x] Create user-friendly shell script wrapper for pipeline execution
+- [x] Create comprehensive documentation for pipeline execution
+- [x] Test pipeline with the new wrapper script
+- [x] Update OpenAI Vector Stores API from beta to stable version
 - [ ] Add pagination support for file and vector store listings
 - [ ] Ensure robust error handling for all API interactions
 - [x] Update all tests to reflect new implementation
@@ -636,6 +641,7 @@ OPENAI_API_KEY=$(grep OPENAI_API_KEY .env | cut -d '=' -f2) python3 -m codedoc.p
 - [x] Create user-friendly shell script wrapper for pipeline execution
 - [x] Create comprehensive documentation for pipeline execution
 - [x] Test pipeline with the new wrapper script
+- [x] Update OpenAI Vector Stores API from beta to stable version
 - [ ] Implement pagination for file and vector store listings
 - [ ] Add more robust error handling throughout the pipeline
 - [ ] Create comprehensive end-user documentation including tutorials and guides

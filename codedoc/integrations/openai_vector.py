@@ -298,7 +298,7 @@ class OpenAIVectorClient:
             # Log the chunking strategy being used
             logger.info(f"{prefix}Using chunking strategy: {chunking_strategy}")
             
-            response = self.client.beta.vector_stores.create(**create_args)
+            response = self.client.vector_stores.create(**create_args)
             
             logger.info(f"{prefix}Vector store created successfully: {response.id}")
             return response
@@ -341,7 +341,10 @@ class OpenAIVectorClient:
                 add_args["chunking_strategy"] = chunking_strategy
                 logger.info(f"{prefix}Using chunking strategy: {chunking_strategy}")
             
-            response = self.client.beta.vector_stores.add_files(**add_args)
+            # Log the action and parameters
+            logger.info(f"{prefix}Adding {len(file_ids)} files to vector store {vector_store_id}")
+            
+            response = self.client.vector_stores.add_files(**add_args)
             
             logger.info(f"{prefix}Files added successfully")
             return response
@@ -367,19 +370,20 @@ class OpenAIVectorClient:
         Returns:
             Tuple of (is_ready, status) where status is the file counts
         """
-        logger.info(f"{prefix}Checking vector store status: {vector_store_id}")
+        logger.info(f"{prefix}Checking status of vector store {vector_store_id}")
         
         for i in range(max_checks):
             try:
-                response = self.client.beta.vector_stores.retrieve(vector_store_id)
+                response = self.client.vector_stores.retrieve(vector_store_id)
                 
                 # Extract file counts
                 if hasattr(response, 'file_counts'):
                     status = response.file_counts
-                    total = status.get('total', 0)
-                    completed = status.get('completed', 0)
-                    failed = status.get('failed', 0)
-                    in_progress = status.get('in_progress', 0)
+                    # Access the fields directly as attributes, not with get()
+                    total = status.total if hasattr(status, 'total') else 0
+                    completed = status.completed if hasattr(status, 'completed') else 0
+                    failed = status.failed if hasattr(status, 'failed') else 0
+                    in_progress = status.in_progress if hasattr(status, 'in_progress') else 0
                     
                     logger.info(f"{prefix}Vector store status: {completed}/{total} files processed, "
                               f"{in_progress} in progress, {failed} failed")
@@ -421,7 +425,7 @@ class OpenAIVectorClient:
         logger.info(f"{prefix}Listing vector stores")
         
         try:
-            response = self.client.beta.vector_stores.list(limit=limit)
+            response = self.client.vector_stores.list(limit=limit)
             
             logger.info(f"{prefix}Found {len(response.data)} vector stores")
             return response.data
@@ -443,10 +447,10 @@ class OpenAIVectorClient:
         Returns:
             True if successful, False otherwise
         """
-        logger.info(f"{prefix}Deleting vector store: {vector_store_id}")
+        logger.info(f"{prefix}Deleting vector store {vector_store_id}")
         
         try:
-            response = self.client.beta.vector_stores.delete(vector_store_id)
+            response = self.client.vector_stores.delete(vector_store_id)
             
             logger.info(f"{prefix}Vector store deleted successfully")
             return getattr(response, 'deleted', True)  # Default to True if 'deleted' attr is missing
@@ -474,7 +478,7 @@ class OpenAIVectorClient:
         Returns:
             Dictionary with search results
         """
-        logger.info(f"{prefix}Searching vector store: {vector_store_id} for '{query}'")
+        logger.info(f"{prefix}Searching vector store {vector_store_id} for '{query}', max results: {max_results}")
         
         try:
             search_args = {
@@ -485,7 +489,7 @@ class OpenAIVectorClient:
             if filters:
                 search_args["filters"] = filters
             
-            response = self.client.beta.vector_stores.search(
+            response = self.client.vector_stores.search(
                 vector_store_id=vector_store_id,
                 **search_args
             )

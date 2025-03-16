@@ -349,10 +349,23 @@ class DirectFileProcessor:
             check_interval=3
         )
         
+        # Convert the FileCounts object to a dictionary for easier handling
+        status_dict = {}
+        if hasattr(status, 'total'):
+            status_dict['total'] = status.total
+        if hasattr(status, 'completed'):
+            status_dict['completed'] = status.completed
+        if hasattr(status, 'failed'):
+            status_dict['failed'] = status.failed
+        if hasattr(status, 'in_progress'):
+            status_dict['in_progress'] = status.in_progress
+        if hasattr(status, 'cancelled'):
+            status_dict['cancelled'] = status.cancelled
+        
         return {
             "status": "success" if is_ready else "in_progress",
             "vector_store_id": vector_store.id,
             "name": name,
             "file_count": len(file_ids),
-            "processing_status": status
+            "processing_status": status_dict
         } 

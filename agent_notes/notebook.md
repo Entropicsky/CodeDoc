@@ -648,3 +648,31 @@ I've updated all remaining instances of "vector_search" to "assistants" in the f
 6. `agent_notes/phase2_technical_design.md` - Updated the technical design document
 
 These changes should ensure that the pipeline works correctly with the updated OpenAI API requirements.
+
+## OpenAI Vector Stores API Update - March 15, 2024
+
+We've updated the OpenAI Vector Stores API integration to use the stable API instead of the beta API:
+
+### Changes Made:
+
+1. Updated all occurrences of `client.beta.vector_stores` to `client.vector_stores` in:
+   - `codedoc/integrations/openai_vector.py`
+   - `codedoc/llm/openai_client.py`
+   - `codedoc/tests/test_integration_no_chunking.py`
+   - `codedoc/integrations/tests/test_openai_vector.py`
+
+2. Fixed the handling of the FileCounts object, which has a different structure in the stable API:
+   - Updated code to access properties directly via attributes instead of dictionary-style access
+   - Added a conversion step to transform the FileCounts object to a dictionary for easier handling downstream
+
+3. Updated the API method calls:
+   - Changed `beta.vector_stores.file_batches.create` to `vector_stores.add_files`
+   - Changed `beta.vector_stores.file_batches.retrieve` to `vector_stores.retrieve_file_batch`
+
+4. Successfully tested the changes by running the pipeline, which now correctly:
+   - Creates a vector store
+   - Adds files to it
+   - Monitors the processing status
+   - Completes the vector store creation process
+
+This update ensures compatibility with the latest OpenAI API structure, as the vector stores feature has graduated from beta to stable status.

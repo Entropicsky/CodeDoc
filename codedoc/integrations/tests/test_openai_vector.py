@@ -34,7 +34,6 @@ class TestOpenAIVectorClient(unittest.TestCase):
         self.mock_files_create = MagicMock()
         self.mock_files_delete = MagicMock()
         
-        self.mock_beta = MagicMock()
         self.mock_vector_stores = MagicMock()
         self.mock_vector_stores_create = MagicMock()
         self.mock_vector_stores_retrieve = MagicMock()
@@ -46,8 +45,8 @@ class TestOpenAIVectorClient(unittest.TestCase):
         self.mock_client.files.create = self.mock_files_create
         self.mock_client.files.delete = self.mock_files_delete
         
-        self.mock_client.beta = self.mock_beta
-        self.mock_beta.vector_stores = self.mock_vector_stores
+        # Mock vector stores directly on the client instead of under beta
+        self.mock_client.vector_stores = self.mock_vector_stores
         self.mock_vector_stores.create = self.mock_vector_stores_create
         self.mock_vector_stores.retrieve = self.mock_vector_stores_retrieve
         self.mock_vector_stores.search = self.mock_vector_stores_search

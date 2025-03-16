@@ -90,14 +90,10 @@ This is a test project for integration testing.
             file_counts={"in_progress": 0, "completed": 2, "failed": 0, "total": 2}
         )
         
-        # Mock beta property
-        self.mock_beta = MagicMock()
-        self.mock_beta.vector_stores = self.mock_vector_stores
-        
         # Set up the OpenAI client instance
         self.mock_openai_instance = MagicMock()
         self.mock_openai_instance.files = self.mock_files
-        self.mock_openai_instance.beta = self.mock_beta
+        self.mock_openai_instance.vector_stores = self.mock_vector_stores
         
         # Make the OpenAI constructor return our mock instance
         self.mock_openai.return_value = self.mock_openai_instance

@@ -201,6 +201,92 @@ search_results = vector_store.search(
 )
 ```
 
+## Technical Architecture
+
+### System Components and Data Flow
+
+CodeDoc consists of the following key components that work together in a pipeline:
+
+```
+┌──────────────────┐     ┌───────────────────┐     ┌─────────────────────┐
+│                  │     │                   │     │                     │
+│  Code Analysis   │────▶│  File Enhancement │────▶│  Documentation      │
+│  Engine          │     │  Pipeline         │     │  Enhancer           │
+│                  │     │                   │     │                     │
+└──────────────────┘     └───────────────────┘     └─────────────────────┘
+         │                        │                          │
+         │                        │                          │
+         ▼                        ▼                          ▼
+┌──────────────────┐     ┌───────────────────┐     ┌─────────────────────┐
+│                  │     │                   │     │                     │
+│  Supplementary   │     │  Direct File      │     │  OpenAI Vector      │
+│  Content Gen     │────▶│  Processor        │────▶│  Store Integration  │
+│                  │     │                   │     │                     │
+└──────────────────┘     └───────────────────┘     └─────────────────────┘
+                                   │                          │
+                                   │                          │
+                                   ▼                          ▼
+                          ┌───────────────────┐     ┌─────────────────────┐
+                          │                   │     │                     │
+                          │  Metadata         │────▶│  Vector Store       │
+                          │  Generator        │     │  Search             │
+                          │                   │     │                     │
+                          └───────────────────┘     └─────────────────────┘
+```
+
+The system follows this processing flow:
+
+1. **Input**: Codebase with existing documentation
+2. **Analysis**: The code analyzer examines code structure, patterns, and complexity
+3. **Enhancement**: The file enhancer improves documentation in source files
+4. **Generation**: The content generator creates supplementary documentation
+5. **Direct Processing**: The DirectFileProcessor prepares and uploads files directly to OpenAI
+6. **Metadata**: Rich metadata is attached to each file for better retrieval
+7. **Vector Store Creation**: A vector store is created and files are added
+8. **Search Integration**: The system enables semantic search via OpenAI's File Search API
+
+### Key Improvements with OpenAI Native Chunking
+
+The current implementation leverages OpenAI's native chunking capabilities through the Files API, which:
+
+1. **Simplifies Architecture**: Eliminates the need for custom chunking logic
+2. **Improves Performance**: Reduces processing overhead and time
+3. **Enhances Search Quality**: Uses OpenAI's optimized chunking for better search results
+4. **Reduces Maintenance**: Fewer components to maintain and debug
+5. **Enables Advanced Features**: Access to OpenAI's latest vector search capabilities
+
+### File Organization
+
+```
+/codedoc-output/
+  /enhanced-codebase/     # Mirror of original structure with enhanced files
+    /src/
+      /module1/           # Maintains original folder structure
+        file1.py          # Enhanced version with improved documentation
+        file2.py
+      /module2/
+        file3.py
+  /supplementary-docs/    # Additional generated documentation
+    /tutorials/           # Step-by-step guides
+    /faqs/                # Generated FAQs
+    /architecture/        # Architectural documentation and diagrams
+  /metadata/              # Analysis results and metrics
+    file_patterns.md      # Pattern analysis for each file
+    file_complexity.md    # Complexity analysis for each file
+  /compiled/              # Files prepared for vector store upload
+    upload_log.json       # Log of upload operations
+```
+
+### OpenAI Integration
+
+The system integrates with OpenAI through:
+
+1. **LLM Integration**: Uses OpenAI's GPT models (default: gpt-4o) for code analysis and enhancement
+2. **Files API**: Directly uploads files to OpenAI with appropriate metadata
+3. **Vector Stores API**: Creates and manages vector stores for semantic search
+4. **Assistants Integration**: Enables purpose="assistants" for use with OpenAI's Assistants API
+5. **Responses API**: Provides semantic search capabilities over the processed codebase
+
 ## Environment Variables
 
 The following environment variables can be used:
