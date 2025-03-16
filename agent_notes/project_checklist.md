@@ -570,6 +570,7 @@ OPENAI_API_KEY=$(grep OPENAI_API_KEY .env | cut -d '=' -f2) python3 -m codedoc.p
 - [x] Test pipeline with the new wrapper script
 - [x] Update OpenAI Vector Stores API from beta to stable version
 - [x] Add batch processing for large file collections (100+ files)
+- [x] Create standalone file uploader utility with OpenAI File Batching API
 - [ ] Implement pagination for file and vector store listings
 - [ ] Add more robust error handling throughout the pipeline
 - [ ] Create comprehensive end-user documentation including tutorials and guides
@@ -644,6 +645,7 @@ OPENAI_API_KEY=$(grep OPENAI_API_KEY .env | cut -d '=' -f2) python3 -m codedoc.p
 - [x] Test pipeline with the new wrapper script
 - [x] Update OpenAI Vector Stores API from beta to stable version
 - [x] Add batch processing for large file collections (100+ files)
+- [x] Create standalone file uploader utility with OpenAI File Batching API
 - [ ] Implement pagination for file and vector store listings
 - [ ] Add more robust error handling throughout the pipeline
 - [ ] Create comprehensive end-user documentation including tutorials and guides

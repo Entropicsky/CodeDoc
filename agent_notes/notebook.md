@@ -712,3 +712,61 @@ This implementation allows for processing arbitrarily large codebases by adding 
 - Rate limits apply to API requests
 
 When working with very large codebases, it may be necessary to create multiple vector stores or to carefully select which files to include.
+
+## New Standalone File Uploader Utility - March 16, 2024
+
+To address the need for a utility to upload files and create vector stores independent of the full pipeline, we've created a new standalone utility:
+
+### File Uploader Utility Features
+
+1. **Standalone Operation**: The utility can be used independently from the main CodeDoc pipeline.
+2. **Recursive Directory Processing**: Can process entire directory trees, searching for specified file types.
+3. **Batched Uploads**: Uses the official OpenAI File Batching API to handle large file collections efficiently.
+4. **State Management**: Maintains state between runs to support resuming interrupted operations.
+5. **Detailed Logging**: Comprehensive logging with debug options for troubleshooting.
+6. **Vector Store Creation**: Can create vector stores from the uploaded files.
+7. **Command Line Interface**: User-friendly CLI with extensive options.
+8. **Shell Script Wrapper**: Simple shell script wrapper for easy use.
+
+### Using the File Uploader
+
+The utility can be used in two ways:
+
+1. **Shell Script**:
+   ```bash
+   ./upload_files.sh --input-dir ./my_code --vector-store-name "My Project"
+   ```
+
+2. **Python Module**:
+   ```python
+   from codedoc.tools.file_uploader import FileUploader
+   
+   uploader = FileUploader(output_dir="output", debug=True)
+   result = uploader.process_directory(
+       input_dir="./my_code",
+       vector_store_name="My Project"
+   )
+   print(f"Vector Store ID: {result['vector_store_id']}")
+   ```
+
+### Implementation Details
+
+The utility uses the OpenAI File Batching API for efficient batch processing:
+
+1. First uploads all files to OpenAI
+2. Creates an empty vector store
+3. Adds files to the vector store in batches (max 100 per batch)
+4. Monitors the processing status of each batch
+
+This approach ensures reliable processing of large codebases while staying within OpenAI's API limits.
+
+### Error Handling and Recovery
+
+The utility includes several error handling and recovery mechanisms:
+
+1. **State Persistence**: Saves state after each operation to enable resuming
+2. **File Skipping**: Skips already processed files for efficiency
+3. **Batch Status Monitoring**: Tracks status of each batch independently
+4. **Detailed Error Reporting**: Records specific errors for each file or batch
+
+Using this utility should make it much easier to recover from failures during vector store creation without having to rerun the entire pipeline.
